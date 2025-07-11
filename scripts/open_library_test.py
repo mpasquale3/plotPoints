@@ -98,7 +98,7 @@ for i, row in df.iterrows():
     author = row["Author"]
     print(f"🔍 Checking: {title} by {author}")
 
-    # Adaptation (only if blank)
+    # Adaptation only if blank
     if row["Adaptation"].strip() == "":
         df.at[i, "Adaptation"] = check_adaptation(title)
 
@@ -113,7 +113,7 @@ for i, row in df.iterrows():
 
     
 
-    time.sleep(0.5)  # avoid rate-limiting
+    time.sleep(0.5)  
 
     # === Map Clean Content Warning Categories ===
 df["Content_Warning_Category"] = df["Content_Warnings"].apply(map_content_warnings)
@@ -218,7 +218,7 @@ def map_genre_tags(tag_text):
         "Visual Poetry": ["visual poetry"]
     }
 
-    # ✅ === ONE GENRE ONLY: Return the first match ===
+    #  === ONE GENRE ONLY Return the first match ===
     primary_genre = "Uncategorized"
     for genre, keywords in genre_mapping.items():
         for keyword in keywords:
@@ -228,7 +228,7 @@ def map_genre_tags(tag_text):
         if primary_genre != "Uncategorized":
             break
 
-    # Subtags stay multi-match
+    # Subtags multi-match
     for label, keywords in trope_keywords.items():
         for keyword in keywords:
             if keyword in tag_text:
@@ -305,4 +305,4 @@ df["Trend_Category"] = df["Trend_Category"].apply(group_trend_category)
 
 # === Save File ===
 df.to_csv("C:/Users/kenna/OneDrive/Documents/PlotPoints/data/plotPoints_updated.csv", index=False)
-print("\n✅ Done! File saved to: data/plotPoints_updated.csv")
+print("\n Done! File saved to: data/plotPoints_updated.csv")
